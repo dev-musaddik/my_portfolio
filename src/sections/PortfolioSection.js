@@ -8,7 +8,6 @@ import React, {
 import { getProjects, getSkills } from "../api/axiosInstance";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { AuthContext } from "../context/AuthContext";
 import SkillCard from "../components/SkillCard";
 import ProjectCard from "../components/ProjectCard";
 import { motion } from "framer-motion";
@@ -18,10 +17,7 @@ import {
   Linkedin,
   RefreshCcw,
   Sparkles,
-  Cloud,
 } from "lucide-react";
-import Typewriter from "typewriter-effect";
-import { UnderlineFadeButton } from "../components/buttons/UnderlineFadeButton";
 import GradientButton from "../components/buttons/GradientButton";
 import EducationCard from "../components/EducationCard";
 import AboutMe from "../components/AboutMe";
@@ -59,14 +55,14 @@ const SectionTitle = ({ eyebrow, title, subtitle }) => (
 );
 
 const PortfolioSection = () => {
-  const { state } = useContext(AuthContext);
-  const { user } = state || {};
+  // const { state } = useContext(AuthContext);
+  // const { user } = state || {};
 
   const [projects, setProjects] = useState([]);
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [typingDone, setTypingDone] = useState(false);
+  // const [typingDone, setTypingDone] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {

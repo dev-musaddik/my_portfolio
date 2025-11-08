@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const SkillCard = ({ skill }) => {
@@ -57,90 +57,90 @@ const SkillCard = ({ skill }) => {
 // 2. Frontend fallback data
 // This data will be used if the backend fetch fails.
 // It matches the structure your SkillCard expects.
-const FRONTEND_FALLBACK_DATA = [
-  { _id: 'fe1', name: 'React', level: 90 },
-  { _id: 'fe2', name: 'JavaScript', level: 95 },
-  { _id: 'fe3', name: 'Tailwind CSS', level: 85 },
-  { _id: 'fe4', name: 'Node.js', level: 70 },
-  { _id: 'fe5', name: 'HTML5', level: 100 },
-  { _id: 'fe6', name: 'Firebase', level: 75 },
-];
+// const FRONTEND_FALLBACK_DATA = [
+//   { _id: 'fe1', name: 'React', level: 90 },
+//   { _id: 'fe2', name: 'JavaScript', level: 95 },
+//   { _id: 'fe3', name: 'Tailwind CSS', level: 85 },
+//   { _id: 'fe4', name: 'Node.js', level: 70 },
+//   { _id: 'fe5', name: 'HTML5', level: 100 },
+//   { _id: 'fe6', name: 'Firebase', level: 75 },
+// ];
 
 // 3. A new component to manage fetching and displaying the skills list
-const SkillsList = () => {
-  const [skills, setSkills] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// const SkillsList = () => {
+//   const [skills, setSkills] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // This function tries to fetch data from the backend
-    const fetchSkills = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+//   useEffect(() => {
+//     // This function tries to fetch data from the backend
+//     const fetchSkills = async () => {
+//       try {
+//         setLoading(true);
+//         setError(null);
         
-        // This will fail, as /api/skills doesn't exist
-        const response = await fetch('/api/skills'); 
+//         // This will fail, as /api/skills doesn't exist
+//         const response = await fetch('/api/skills'); 
         
-        if (!response.ok) {
-          // This error will be caught by the 'catch' block
-          throw new Error('Backend server not found or returned an error.');
-        }
+//         if (!response.ok) {
+//           // This error will be caught by the 'catch' block
+//           throw new Error('Backend server not found or returned an error.');
+//         }
         
-        const data = await response.json();
-        setSkills(data); // If successful, set backend data
+//         const data = await response.json();
+//         setSkills(data); // If successful, set backend data
 
-      } catch (err) {
-        // *** THIS IS THE FALLBACK LOGIC ***
-        // If the 'try' block fails, we land here.
-        console.error('Backend fetch failed:', err.message);
-        setError('Could not reach backend. Displaying sample data.');
-        setSkills(FRONTEND_FALLBACK_DATA); // Use the frontend data instead
+//       } catch (err) {
+//         // *** THIS IS THE FALLBACK LOGIC ***
+//         // If the 'try' block fails, we land here.
+//         console.error('Backend fetch failed:', err.message);
+//         setError('Could not reach backend. Displaying sample data.');
+//         setSkills(FRONTEND_FALLBACK_DATA); // Use the frontend data instead
       
-      } finally {
-        setLoading(false);
-      }
-    };
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-    fetchSkills();
-  }, []); // The empty array [] means this effect runs once on component mount
+//     fetchSkills();
+//   }, []); // The empty array [] means this effect runs once on component mount
 
-  // Render loading state
-  if (loading) {
-    return (
-      <div className="text-center p-10">
-        <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-        <p className="mt-4 text-lg font-medium">Loading Skills...</p>
-      </div>
-    );
-  }
+//   // Render loading state
+//   if (loading) {
+//     return (
+//       <div className="text-center p-10">
+//         <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+//         <p className="mt-4 text-lg font-medium">Loading Skills...</p>
+//       </div>
+//     );
+//   }
 
-  // Render the list of skills
-  return (
-    <div className="max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold text-center mb-4">My Skills</h1>
+//   // Render the list of skills
+//   return (
+//     <div className="max-w-6xl mx-auto">
+//       <h1 className="text-4xl font-bold text-center mb-4">My Skills</h1>
       
-      {/* Display a message if there was an error (and we are using fallback data) */}
-      {error && (
-        <div className="text-center p-4 mb-6 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-lg">
-          {error}
-        </div>
-      )}
+//       {/* Display a message if there was an error (and we are using fallback data) */}
+//       {error && (
+//         <div className="text-center p-4 mb-6 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-lg">
+//           {error}
+//         </div>
+//       )}
 
-      {/* Render the grid of skills */}
-      {skills.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills.map(skill => (
-            <SkillCard key={skill._id} skill={skill} />
-          ))}
-        </div>
-      ) : (
-        // Show this if loading is done but skills array is still empty
-        <p className="text-center text-lg">No skills to display.</p>
-      )}
-    </div>
-  );
-};
+//       {/* Render the grid of skills */}
+//       {skills.length > 0 ? (
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//           {skills.map(skill => (
+//             <SkillCard key={skill._id} skill={skill} />
+//           ))}
+//         </div>
+//       ) : (
+//         // Show this if loading is done but skills array is still empty
+//         <p className="text-center text-lg">No skills to display.</p>
+//       )}
+//     </div>
+//   );
+// };
 export default SkillCard;
 
 

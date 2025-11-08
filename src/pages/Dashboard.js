@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../api/axiosInstance';
 import DailyRoutineSection from '../sections/DailyRoutineSection'; // Import DailyRoutineSection
-import AboutMeSection from '../sections/AboutMeSection';
 
 const Dashboard = () => {
     const [portfolioItems, setPortfolioItems] = useState([]);

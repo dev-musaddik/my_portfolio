@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import { FaLaptopCode, FaRobot, FaNetworkWired, FaCogs } from "react-icons/fa";
 
 const HeroSection = () => {
   const [typingDone, setTypingDone] = useState(false);
-  const controls = useAnimation();
+//   const controls = useAnimation();
   const [offsetY, setOffsetY] = useState(0);
 
   // Parallax effect on scroll
