@@ -98,7 +98,7 @@ const AboutSection = () => {
           <div className="relative group">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 via-orange-500 to-rose-500 blur opacity-40 group-hover:opacity-70 transition duration-500" />
             <img
-              src="/profile.WEBP"
+              src="/profile.webp"
               alt="Musaddik Hossain Profile"
               className="relative rounded-full h-72 w-72 md:h-96 md:w-96 object-cover border-4 border-white/20 shadow-2xl transform group-hover:scale-105 transition duration-500"
             />
