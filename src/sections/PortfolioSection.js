@@ -1,7 +1,6 @@
 import React, {
   useState,
   useEffect,
-  useContext,
   useMemo,
   useCallback,
 } from "react";
@@ -55,8 +54,6 @@ const SectionTitle = ({ eyebrow, title, subtitle }) => (
 );
 
 const PortfolioSection = () => {
-  // const { state } = useContext(AuthContext);
-  // const { user } = state || {};
 
   const [projects, setProjects] = useState([]);
   const [skills, setSkills] = useState([]);
