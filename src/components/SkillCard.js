@@ -10,17 +10,17 @@ const SkillCard = ({ skill }) => {
       className="relative p-[1px] rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-orange-500 shadow-lg hover:shadow-xl group"
       title={`${skill.name}: ${skill.level}%`}
     >
-      <div className="rounded-3xl bg-white dark:bg-gray-900 p-6 transition-all duration-300 h-full">
+      <div className="rounded-3xl bg-white dark:bg-gray-900 p-4 md:p-6 transition-all duration-300 h-full">
         {/* Header Section */}
         <div className="flex items-center gap-4 mb-4">
           {skill.icon && (
             <img
               src={skill.icon}
               alt={`${skill.name} icon`}
-              className="w-10 h-10 object-contain drop-shadow-lg"
+              className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg"
             />
           )}
-          <h3 className="text-2xl font-semibold bg-gradient-to-r from-indigo-500 to-orange-500 bg-clip-text text-transparent">
+          <h3 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-indigo-500 to-orange-500 bg-clip-text text-transparent">
             {skill.name}
           </h3>
         </div>

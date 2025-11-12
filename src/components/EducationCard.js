@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 // Education Card component (individual timeline entry)
 const EducationCard = ({ item }) => {
   return (
-    <div className="relative pl-10 mb-12 group">
+    <div className="relative pl-6 md:pl-10 mb-12 group">
       {/* Timeline Dot */}
       <div className="absolute left-[-9px] top-1 w-6 h-6 bg-gray-900 rounded-full border-4 border-green-500 transition-all duration-300 group-hover:scale-110"></div>
 
       <time className="block mb-1 text-sm font-medium text-gray-400">
         {item?.date}
       </time>
-      <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
+      <h3 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-1">
         {item?.title}
       </h3>
       <p className="text-lg font-medium text-green-500 dark:text-green-400 mb-4">

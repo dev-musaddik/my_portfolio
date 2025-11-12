@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import ThemeToggle from "./ThemeToggle";
 import PersonalInfoNav from "./PersonalInfoNav";
 import HackingOverlay from "./HackingOverlay";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   const { state, dispatch } = useContext(AuthContext);
@@ -55,7 +56,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-background/80 dark:bg-background-dark/80 backdrop-blur-md p-4 shadow-2xl border border-white/10 rounded-b-2xl mx-4 mt-4 relative overflow-hidden">
+    <nav className="bg-background/80 dark:bg-background-dark/80 backdrop-blur-md p-4 shadow-2xl border border-white/10 rounded-b-2xl mx-0 md:mx-4 mt-4 relative overflow-hidden">
       {hacking && <HackingOverlay active={true} />}
 
       <div className="container mx-auto flex justify-between items-center">
@@ -108,6 +109,9 @@ const Navbar = () => {
 
         <div className="flex items-center">
           <ThemeToggle />
+          <div className="md:hidden">
+            <MobileNav />
+          </div>
         </div>
       </div>
     </nav>

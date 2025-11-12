@@ -95,7 +95,7 @@ const PortfolioSection = () => {
         <div className="absolute bottom-0 left-1/4 h-64 w-64 rounded-full bg-rose-400/30 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 md:px-8 lg:px-10 py-12 md:py-16 lg:py-20 space-y-16">
+      <div className="mx-auto max-w-7xl px-0 md:px-8 lg:px-10 py-12 md:py-16 lg:py-20 space-y-16">
         {/* HERO */}
         <div>
           <HeroSection/>

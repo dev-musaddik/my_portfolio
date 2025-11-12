@@ -21,7 +21,7 @@ const App = () => {
                 <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-black">
                     <ScrollProgressBar />
                     <Navbar />
-                    <main className="flex-grow container mx-auto p-4 md:p-8 mt-8">
+                    <main className="flex-grow container mx-auto p-0 md:p-4 mt-8">
                         <Routes>
                             <Route path="/register" element={<Register />} />
                             <Route path="/login" element={<Login />} />
@@ -33,7 +33,7 @@ const App = () => {
                             <Route path="/project/:id" element={<ProjectDetails />} />
                         </Routes>
                     </main>
-                    <footer className="bg-white dark:bg-black text-black dark:text-white p-4 text-center rounded-t-2xl mx-4 mb-4 mt-8 shadow-xl">
+                    <footer className="bg-white dark:bg-black text-black dark:text-white p-4 text-center rounded-t-2xl mx-0 md:mx-4 mb-4 mt-8 shadow-xl">
                         <div className="container mx-auto">
                             <p className="text-gray-400">&copy; {new Date().getFullYear()} My MERN Portfolio. All rights reserved.</p>
                         </div>

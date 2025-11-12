@@ -28,7 +28,7 @@ const ProjectCard = ({ project }) => {
         <img
           src={ randomImage ||project.imageUrl }
           alt={project.title}
-          className="w-full h-48 object-cover rounded-t-xl"
+          className="w-full h-40 md:h-48 object-cover rounded-t-xl"
         />
         <div className="p-4 flex flex-col">
           <h5 className="text-2xl font-semibold text-black dark:text-white mb-2 hover:text-orange-500 transition-all duration-300">

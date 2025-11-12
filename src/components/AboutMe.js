@@ -31,7 +31,7 @@ const AboutSection = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
-      className="rounded-3xl border border-white/20 bg-gradient-to-br from-white/90 via-indigo-50/70 to-fuchsia-50/60 dark:from-gray-900/80 dark:via-gray-800/70 dark:to-gray-900/60 backdrop-blur-xl p-8 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
+      className="rounded-3xl border border-white/20 bg-gradient-to-br from-white/90 via-indigo-50/70 to-fuchsia-50/60 dark:from-gray-900/80 dark:via-gray-800/70 dark:to-gray-900/60 backdrop-blur-xl p-4 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
     >
       <SectionTitle
         eyebrow="About"
@@ -41,7 +41,7 @@ const AboutSection = () => {
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Left Side — Text Section */}
-        <div className="order-2 lg:order-1 space-y-6 text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+        <div className="order-2 lg:order-1 space-y-6 text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
           <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-indigo-500/10 via-orange-500/10 to-rose-500/10 rounded-xl border border-white/10 shadow-md">
             <Briefcase className="text-orange-500 w-6 h-6" />
             <p className="text-sm md:text-base font-medium">
@@ -84,7 +84,7 @@ const AboutSection = () => {
 
           {/* Resume Button */}
           <a
-            href="/Musaddik_Hossain_Resume.pdf"
+            href="/Musaddik_Hossain_CV.pdf"
             download
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 via-orange-500 to-rose-500 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-all duration-300"
           >

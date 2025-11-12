@@ -39,7 +39,7 @@ const HeroSection = () => {
       transition={{ duration: 1 }}
       className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/40 dark:bg-gray-900/40 backdrop-blur-2xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.35)]"
     >
-      <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between min-h-[75vh] px-6 py-16 md:py-28 gap-10">
+      <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between min-h-[75vh] px-0 py-16 md:py-28 gap-10">
 
         {/* Left Text Section */}
         <div className="flex-1 text-center md:text-left flex flex-col gap-6">
@@ -83,12 +83,12 @@ const HeroSection = () => {
         </div>
 
         {/* Right Icon Section */}
-        <div className="flex-1 flex justify-center md:justify-end relative h-[400px]">
+        <div className="flex-1 flex justify-center md:justify-end relative h-[300px] md:h-[400px]">
           {floatingIcons.map((item, index) => (
             <motion.div
               key={index}
-              className={`absolute ${item.size} ${item.className} cursor-pointer hover:scale-125 hover:shadow-lg transition-transform duration-300`}
-              style={{ top: 150 + item.y, left: 150 + item.x, rotate: item.rotate }}
+              className={`absolute ${item.size} ${item.className} cursor-pointer hover:scale-125 hover:shadow-lg transition-transform duration-300 ${index >= 2 ? 'hidden md:block' : ''}`}
+              style={{ top: 150 + item.y, left: `${50 + item.x / 5}%`, rotate: item.rotate }}
               animate={{ y: [item.y, item.y + 20, item.y], rotate: [item.rotate, item.rotate + 15, item.rotate] }}
               transition={{ repeat: Infinity, duration: 4 + index }}
             >
