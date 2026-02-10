@@ -1,111 +1,199 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import Typewriter from "typewriter-effect";
-import { FaLaptopCode, FaRobot, FaNetworkWired, FaCogs } from "react-icons/fa";
+import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 
 const HeroSection = () => {
-  const [typingDone, setTypingDone] = useState(false);
-//   const controls = useAnimation();
-  const [offsetY, setOffsetY] = useState(0);
+  // Mouse tilt effect for the hero card
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [30, -30]);
+  const rotateY = useTransform(x, [-100, 100], [-30, 30]);
 
-  // Parallax effect on scroll
-  useEffect(() => {
-    const handleScroll = () => setOffsetY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const handleMouseMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((event.clientX - centerX) / 10);
+    y.set((event.clientY - centerY) / 10);
+  };
 
-  const CustomButton = ({ href, text }) => (
-    <a
-      href={href}
-      className="relative inline-block px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-blue-500 rounded-full overflow-hidden group transition-all duration-300 hover:scale-110 hover:shadow-lg"
-    >
-      <span className="relative z-10">{text}</span>
-      <span className="absolute inset-0 bg-white opacity-10 transition-opacity duration-300 group-hover:opacity-20 rounded-full"></span>
-    </a>
-  );
-
-  const floatingIcons = [
-    { icon: <FaLaptopCode />, className: "text-orange-400", size: "text-7xl", x: 0, y: -offsetY * 0.05, rotate: offsetY * 0.1 },
-    { icon: <FaRobot />, className: "text-blue-400", size: "text-6xl", x: 100, y: -offsetY * 0.08, rotate: -offsetY * 0.08 },
-    { icon: <FaNetworkWired />, className: "text-green-400", size: "text-5xl", x: -120, y: -offsetY * 0.06, rotate: offsetY * 0.15 },
-    { icon: <FaCogs />, className: "text-purple-400", size: "text-6xl", x: 50, y: offsetY * 0.05, rotate: -offsetY * 0.12 },
-  ];
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/40 dark:bg-gray-900/40 backdrop-blur-2xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.35)]"
-    >
-      <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between min-h-[75vh] px-0 py-16 md:py-28 gap-10">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden rounded-3xl border border-white/20 bg-white/40 dark:bg-gray-900/40 backdrop-blur-3xl shadow-2xl">
+      {/* Dynamic Background Gradients */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/20 rounded-full blur-[100px] animate-pulse-slow" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/20 rounded-full blur-[100px] animate-pulse-slower" />
+        <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-orange-500/10 rounded-full blur-[80px] animate-float" />
+      </div>
 
-        {/* Left Text Section */}
-        <div className="flex-1 text-center md:text-left flex flex-col gap-6">
-          <p className="text-sm tracking-widest text-gray-700 dark:text-gray-300 uppercase animate-fade-in-down">
-            Portfolio
-          </p>
-
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white animate-fade-in-up">
-            Hay! i'm 
-            {typingDone ? (
-              ' Musaddik'
-            ) : (
-              <Typewriter
-                onInit={(typewriter) => {
-                  typewriter.typeString(' Musaddik').callFunction(() => setTypingDone(true)).start();
-                }}
-                options={{ autoStart: true, loop: false, delay: 75, cursor: '|' }}
-              />
-            )}
-            <span className="ml-3 bg-gradient-to-r from-orange-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
-              Hossain
+      <div className="container mx-auto px-4 md:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        
+        {/* Left Content Area */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center lg:text-left space-y-8"
+        >
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-gray-800/50 border border-white/20 dark:border-gray-700 backdrop-blur-sm shadow-sm mx-auto lg:mx-0">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-gray-700/90 dark:text-gray-300 animate-fade-in">
-            <Typewriter
-              options={{
-                strings: ['Future Engineer', 'Coder', 'Programmer', 'Tech Enthusiast', 'Problem Solver'],
-                autoStart: true,
-                loop: true,
-                deleteSpeed: 40,
-                delay: 60,
-              }}
-            />
-          </p>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <CustomButton href="#about" text="Learn more about me" />
-            <CustomButton href="#projects" text="Explore projects" />
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-300 tracking-wide uppercase">
+              Available for Hire
+            </span>
           </div>
-        </div>
 
-        {/* Right Icon Section */}
-        <div className="flex-1 flex justify-center md:justify-end relative h-[300px] md:h-[400px]">
-          {floatingIcons.map((item, index) => (
-            <motion.div
-              key={index}
-              className={`absolute ${item.size} ${item.className} cursor-pointer hover:scale-125 hover:shadow-lg transition-transform duration-300 ${index >= 2 ? 'hidden md:block' : ''}`}
-              style={{ top: 150 + item.y, left: `${50 + item.x / 5}%`, rotate: item.rotate }}
-              animate={{ y: [item.y, item.y + 20, item.y], rotate: [item.rotate, item.rotate + 15, item.rotate] }}
-              transition={{ repeat: Infinity, duration: 4 + index }}
+          {/* Headlines */}
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-[1.1]">
+              Building <br />
+              <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
+                Digital Reality
+              </span>
+            </h1>
+            <div className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-medium h-8">
+              <Typewriter
+                options={{
+                    strings: [
+                        'Full-Stack Developer', 
+                        'MERN Stack Expert', 
+                        'Project Manager', 
+                        'Tech Enthusiast'
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    deleteSpeed: 30,
+                }}
+              />
+            </div>
+            <p className="max-w-xl mx-auto lg:mx-0 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
+              I transform complex ideas into robust, scalable, and beautiful web applications. 
+              Bridging the gap between technical excellence and strategic business growth.
+            </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+            <a
+              href="#projects"
+              className="group relative px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 overflow-hidden"
             >
-              {item.icon}
-            </motion.div>
-          ))}
-        </div>
-      </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+              View Projects
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            
+            <a
+              href="/Musaddik_Hossain_CV.pdf"
+              download
+              className="px-8 py-4 rounded-full border border-gray-300 dark:border-gray-600 font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 flex items-center gap-2"
+            >
+              <Download className="w-5 h-5" />
+              Download CV
+            </a>
+          </div>
 
-      {/* Layered Gradient & Glow Backgrounds */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute h-full w-full animate-spin-slow opacity-30 bg-[radial-gradient(circle_at_20%_30%,rgba(251,191,36,0.25),transparent 70%)]" />
-        <div className="absolute h-full w-full animate-pulse-slower opacity-25 bg-[radial-gradient(circle_at_70%_70%,rgba(16,185,129,0.2),transparent 60%)]" />
-        <div className="absolute h-full w-full animate-bounce-slow opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.15),transparent 60%)]" />
-        <div className="absolute h-full w-full animate-wave-slow opacity-15 bg-[radial-gradient(circle_at_30%_50%,rgba(236,72,153,0.1),transparent 60%)]" />
+          {/* Social Proof / Tech Stack (Optional) */}
+           <div className="pt-8 flex items-center gap-6 justify-center lg:justify-start opacity-70">
+                <a href="https://github.com/dev-musaddik" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors">
+                    <Github className="w-6 h-6" />
+                </a>
+                <a href="https://www.linkedin.com/in/musaddikh13/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+                    <Linkedin className="w-6 h-6" />
+                </a>
+                <a href="mailto:musaddikh13@gmail.com" className="hover:text-orange-500 transition-colors">
+                    <Mail className="w-6 h-6" />
+                </a>
+           </div>
+
+        </motion.div>
+
+        {/* Right 3D Content Area */}
+        <motion.div
+           style={{ x, y, rotateX, rotateY, z: 100 }}
+           onMouseMove={handleMouseMove}
+           onMouseLeave={handleMouseLeave}
+           initial={{ opacity: 0, scale: 0.8 }}
+           animate={{ opacity: 1, scale: 1 }}
+           transition={{ duration: 0.8, delay: 0.2 }}
+           className="hidden lg:flex items-center justify-center perspective-1000 cursor-pointer"
+        >
+          <div className="relative w-[500px] h-[600px] bg-gradient-to-br from-gray-900 to-black rounded-[40px] border border-gray-700 shadow-2xl p-8 flex flex-col justify-between overflow-hidden transform-style-3d group">
+            
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50 pointer-events-none rounded-[40px]" />
+            
+            {/* Header of the "Code Editor" */}
+            <div className="flex items-center justify-between mb-8">
+                <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                </div>
+                <div className="text-gray-500 text-sm font-mono">Profile.js</div>
+            </div>
+
+            {/* Code Content Visualization */}
+            <div className="font-mono text-sm space-y-4 text-gray-300 relative z-10">
+                <div className="flex">
+                    <span className="text-pink-500 mr-2">const</span>
+                    <span className="text-blue-400">developer</span>
+                    <span className="text-white mx-2">=</span>
+                    <span className="text-yellow-300">{`{`}</span>
+                </div>
+                <div className="pl-6">
+                    <span className="text-purple-400">name:</span>
+                    <span className="text-green-400 ml-2">'Musaddik Hossain',</span>
+                </div>
+                <div className="pl-6 code-line">
+                    <span className="text-purple-400">skills:</span>
+                    <span className="text-yellow-300 ml-2">['React', 'Node', 'MERN'],</span>
+                </div>
+                <div className="pl-6">
+                    <span className="text-purple-400">passion:</span>
+                    <span className="text-green-400 ml-2">'Building Scalable Systems',</span>
+                </div>
+                <div className="pl-6">
+                    <span className="text-purple-400">status:</span>
+                    <span className="text-green-400 ml-2">'Ready to Collaborate',</span>
+                </div>
+                <div>
+                     <span className="text-yellow-300">{`}`}</span>
+                </div>
+            </div>
+
+            {/* Floating Elements inside card */}
+            <div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+            <div className="absolute top-20 left-10 w-16 h-16 bg-blue-500 rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
+
+            {/* Bottom Info */}
+             <div className="mt-8 pt-6 border-t border-gray-800 flex items-center justify-between">
+                <div className="text-xs text-gray-500">
+                    <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        Compiling Success...
+                    </div>
+                </div>
+                <div className="text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    100%
+                </div>
+             </div>
+
+          </div>
+        </motion.div>
+
       </div>
-    </motion.section>
+    </section>
   );
 };
 

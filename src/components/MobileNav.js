@@ -93,11 +93,19 @@ const MobileNav = ({ activeSection, setActiveSection }) => {
               <MobileNavItem label="Login" to="/login" setIsOpen={setIsOpen} />
             </>
           )}
-          {/* Original section navigation items - keep if still needed for in-page scrolling */}
-          <MobileNavItem label="Portfolio" section="portfolio" activeSection={activeSection} setActiveSection={setActiveSection} setIsOpen={setIsOpen} />
-          <MobileNavItem label="Daily Routine" section="daily-routine" activeSection={activeSection} setActiveSection={setActiveSection} setIsOpen={setIsOpen} />
-          <MobileNavItem label="Image Posting" section="image-posting" activeSection={activeSection} setActiveSection={setIsOpen} />
-          <MobileNavItem label="Blog" section="blog" activeSection={activeSection} setActiveSection={setIsOpen} />
+          {/* Updated Portfolio Section Navigation */}
+          <div className="border-t border-gray-700 my-2 pt-2">
+            {[ 'Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Contact'].map((item) => (
+               <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-left px-4 py-3 text-lg font-semibold text-white hover:bg-gray-800 transition-all duration-300 ease-in-out"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -45,7 +45,7 @@ const AboutSection = () => {
           <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-indigo-500/10 via-orange-500/10 to-rose-500/10 rounded-xl border border-white/10 shadow-md">
             <Briefcase className="text-orange-500 w-6 h-6" />
             <p className="text-sm md:text-base font-medium">
-              Currently working as a <span className="font-semibold text-orange-500">Shopify Developer & SEO Intern</span> at {""}
+              Currently working as a <span className="font-semibold text-orange-500">Project Manager</span> at {""}
               <a
                 href="https://axelmandigital.co.uk/"
                 target="_blank"

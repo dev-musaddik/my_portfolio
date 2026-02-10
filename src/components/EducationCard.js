@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 // Education Card component (individual timeline entry)
 const EducationCard = ({ item }) => {
+  const [showResults, setShowResults] = useState(false);
+
   return (
     <div className="relative pl-6 md:pl-10 mb-12 group">
       {/* Timeline Dot */}
@@ -24,34 +26,60 @@ const EducationCard = ({ item }) => {
 
       {/* Highlighted Semester Results */}
       {item?.semesters && (
-        <div className="mt-5 space-y-2">
-          <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
-            Semester Results
-          </h4>
-          <div className="grid gap-2">
-            {item.semesters.map((sem, index) => (
-              <div
-                key={index}
-                className={`flex justify-between items-center p-3 rounded-lg border ${
-                  sem.gpa >= 3.7
-                    ? 'bg-green-100/80 dark:bg-green-900/30 border-green-400 text-green-700 dark:text-green-300'
-                    : sem.gpa >= 3.3
-                    ? 'bg-emerald-100/80 dark:bg-emerald-900/30 border-emerald-400 text-emerald-700 dark:text-emerald-300'
-                    : sem.gpa >= 2.8
-                    ? 'bg-yellow-100/80 dark:bg-yellow-900/30 border-yellow-400 text-yellow-700 dark:text-yellow-300'
-                    : 'bg-red-100/80 dark:bg-red-900/30 border-red-400 text-red-700 dark:text-red-300'
-                }`}
-              >
-                <span className="font-medium">{sem.title}</span>
-                <span className="font-bold">GPA: {sem.gpa}</span>
-              </div>
-            ))}
+        <div className="mt-5">
+           <button
+            onClick={() => setShowResults(!showResults)}
+            className="flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors focus:outline-none mb-3"
+          >
+            {showResults ? (
+              <>
+                Hide Results
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+              </>
+            ) : (
+              <>
+                View Semester Results
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </>
+            )}
+          </button>
+
+          <div 
+            className={`space-y-2 overflow-hidden transition-all duration-300 ease-in-out ${
+              showResults ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
+            {/* Using a wrapper to avoid padding issues during animation if needed, but simple height transition works well here */}
+            <div className="pt-1"> 
+                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                    Semester Results
+                </h4>
+                <div className="grid gap-2">
+                    {item.semesters.map((sem, index) => (
+                    <div
+                        key={index}
+                        className={`flex justify-between items-center p-3 rounded-lg border ${
+                        sem.gpa >= 3.7
+                            ? 'bg-green-100/80 dark:bg-green-900/30 border-green-400 text-green-700 dark:text-green-300'
+                            : sem.gpa >= 3.3
+                            ? 'bg-emerald-100/80 dark:bg-emerald-900/30 border-emerald-400 text-emerald-700 dark:text-emerald-300'
+                            : sem.gpa >= 2.8
+                            ? 'bg-yellow-100/80 dark:bg-yellow-900/30 border-yellow-400 text-yellow-700 dark:text-yellow-300'
+                            : 'bg-red-100/80 dark:bg-red-900/30 border-red-400 text-red-700 dark:text-red-300'
+                        }`}
+                    >
+                        <span className="font-medium">{sem.title}</span>
+                        <span className="font-bold">GPA: {sem.gpa}</span>
+                    </div>
+                    ))}
+                </div>
+                {item.note && (
+                    <p className="mt-3 text-sm italic text-yellow-700 dark:text-yellow-300 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                    {item.note}
+                    </p>
+                )}
+            </div>
           </div>
-          {item.note && (
-            <p className="mt-3 text-sm italic text-yellow-700 dark:text-yellow-300 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
-              {item.note}
-            </p>
-          )}
         </div>
       )}
     </div>

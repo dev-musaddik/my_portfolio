@@ -1,16 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import ThemeToggle from "./ThemeToggle";
 import PersonalInfoNav from "./PersonalInfoNav";
 import HackingOverlay from "./HackingOverlay";
 import MobileNav from "./MobileNav";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const { state, dispatch } = useContext(AuthContext);
   const { isAuthenticated, loading, user } = state;
   const [isDeveloper, setIsDeveloper] = useState(true);
   const [hacking, setHacking] = useState(false);
+  const [hoveredTab, setHoveredTab] = useState(null);
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -23,98 +25,137 @@ const Navbar = () => {
     setTimeout(() => setHacking(false), 1200);
   };
 
-  const authLinks = (
-    <div className="hidden md:flex space-x-6 items-center">
-      {[
-        { to: "/blogs", label: "Blog" },
-        { to: "/dashboard", label: "Dashboard" },
-        ...(user && user.role === "admin"
-          ? [{ to: "/admin", label: "Admin" }]
-          : []),
-      ].map((link, i) => (
-        <Link
-          key={i}
-          to={link.to}
-          className="relative text-text-primary dark:text-text-primary-dark px-4 py-2 rounded-md overflow-hidden group transition-all duration-300"
-        >
-          <span className="relative z-10 group-hover:text-primary-dark dark:group-hover:text-primary">{link.label}</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 blur-md transition-all duration-300"></span>
-          <span className="absolute inset-0 ring-1 ring-cyan-400 dark:ring-purple-500 rounded-md opacity-0 group-hover:opacity-100 animate-pulse"></span>
-        </Link>
-      ))}
+  const navLinks = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Go Pro" }, // Renamed from Experience for punchiness? No, keep standard names but cleaner
+    { id: "projects", label: "Work" },
+    { id: "education", label: "Edu" },
+    { id: "contact", label: "Contact" },
+  ];
 
-      <a
-        onClick={logout}
-        href="#!"
-        className="relative text-text-primary dark:text-text-primary-dark px-4 py-2 rounded-md overflow-hidden group transition-all duration-300"
-      >
-        <span className="relative z-10 group-hover:text-primary-dark dark:group-hover:text-primary">Logout</span>
-        <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-red-500 opacity-0 group-hover:opacity-100 blur-md transition-all duration-300"></span>
-        <span className="absolute inset-0 ring-1 ring-pink-400 dark:ring-red-500 rounded-md opacity-0 group-hover:opacity-100 animate-pulse"></span>
-      </a>
-    </div>
-  );
+  const simpleLinks = [
+    { id: "blogs", label: "Blog", to: "/blogs" },
+    { id: "register", label: "Register", to: "/register" },
+    { id: "login", label: "Login", to: "/login" },
+  ];
+
+  /* Scroll logic for Smart Navbar */
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > 100) { 
+            if (currentScrollY > lastScrollY) {
+            setIsVisible(false);
+            } else {
+            setIsVisible(true);
+            }
+        } else {
+            setIsVisible(true);
+        }
+        setLastScrollY(currentScrollY);
+      }
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    return () => window.removeEventListener('scroll', controlNavbar);
+  }, [lastScrollY]);
 
   return (
-    <nav className="bg-background/80 dark:bg-background-dark/80 backdrop-blur-md p-4 shadow-2xl border border-white/10 rounded-b-2xl mx-0 md:mx-4 mt-4 relative overflow-hidden">
+    <>
       {hacking && <HackingOverlay active={true} />}
-
-      <div className="container mx-auto flex justify-between items-center">
-        <Link
-          to="/"
-          className="text-text-primary dark:text-text-primary-dark text-2xl font-bold relative group"
-        >
-          <span className="relative z-10">My MERN Portfolio</span>
-          <span className="absolute inset-x-0 -bottom-1 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></span>
-        </Link>
-
-        {/* Animated Mode Toggle */}
-        <div className="hidden md:flex items-center space-x-3">
-          <span
-            className={`font-semibold transition-colors duration-300 ${
-              isDeveloper ? "text-cyan-400" : "text-text-primary/50"
-            }`}
-          >
-            Developer
-          </span>
-
-          <button
-            onClick={handleToggle}
-            className="relative w-16 h-8 flex items-center bg-gray-800 dark:bg-gray-900 rounded-full p-1 cursor-pointer overflow-hidden shadow-lg border border-white/20"
-          >
-            <div
-              className={`w-6 h-6 rounded-full transform transition-all duration-500 ease-in-out shadow-[0_0_10px_#00ffff] ${
-                isDeveloper ? "translate-x-0 bg-cyan-400" : "translate-x-8 bg-purple-400"
-              }`}
+      
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ 
+            y: isVisible ? 0 : -100,
+            opacity: isVisible ? 1 : 0
+        }}
+        transition={{ duration: 0.3 }}
+        className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
+      >
+        <div className="flex items-center gap-4 bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-full shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] px-6 py-3 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.5)]">
+            
+            {/* Logo Area */}
+            <Link
+            to="/"
+            className="text-xl font-bold bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent mr-4"
             >
-              <div className="absolute inset-0 animate-ping rounded-full bg-white/30"></div>
+            MM
+            </Link>
+
+            {/* Desktop Links */}
+            <div className="hidden md:flex items-center gap-1">
+            {(isDeveloper ? navLinks : simpleLinks).map((link) => (
+                link.to ? (
+                    <Link
+                    key={link.id}
+                    to={link.to}
+                    onMouseEnter={() => setHoveredTab(link.id)}
+                    onMouseLeave={() => setHoveredTab(null)}
+                    className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors"
+                    >
+                    {hoveredTab === link.id && (
+                        <motion.span
+                        layoutId="nav-hover"
+                        className="absolute inset-0 z-[-1] bg-gray-200/50 dark:bg-white/10 rounded-full"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    {link.label}
+                    </Link>
+                ) : (
+                    <a
+                    key={link.id}
+                    href={link.id === 'experience' ? '#experience' : `#${link.id}`}
+                    onMouseEnter={() => setHoveredTab(link.id)}
+                    onMouseLeave={() => setHoveredTab(null)}
+                    className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors"
+                    >
+                    {hoveredTab === link.id && (
+                        <motion.span
+                        layoutId="nav-hover"
+                        className="absolute inset-0 z-[-1] bg-gray-200/50 dark:bg-white/10 rounded-full"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                    )}
+                    {link.label === 'Go Pro' ? 'Experience' : link.label}
+                    </a>
+                )
+            ))}
             </div>
-          </button>
 
-          <span
-            className={`font-semibold transition-colors duration-300 ${
-              !isDeveloper ? "text-purple-400" : "text-text-primary/50"
-            }`}
-          >
-            Personal
-          </span>
-        </div>
+            {/* Separator */}
+            <div className="h-6 w-px bg-gray-300 dark:bg-gray-700 mx-2 hidden md:block" />
 
-        {/* Right Section */}
-        <div className="hidden md:flex space-x-6 items-center">
-          {!loading && (
-            <>{!isDeveloper && (isAuthenticated ? authLinks : <PersonalInfoNav />)}</>
-          )}
-        </div>
+            {/* Actions Area */}
+            <div className="flex items-center gap-3">
+                {/* Mode Toggle */}
+                <button
+                    onClick={handleToggle}
+                    className="relative group p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+                    title={isDeveloper ? "Switch to Personal" : "Switch to Developer"}
+                >
+                    <div className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${isDeveloper ? 'border-cyan-500 bg-cyan-500/20' : 'border-purple-500 bg-purple-500/20'}`} />
+                </button>
 
-        <div className="flex items-center">
-          <ThemeToggle />
-          <div className="md:hidden">
-            <MobileNav />
-          </div>
+                <ThemeToggle />
+
+                {/* Mobile Menu Trigger */}
+                <div className="md:hidden">
+                    <MobileNav />
+                </div>
+            </div>
+
         </div>
-      </div>
-    </nav>
+      </motion.nav>
+    </>
   );
 };
 

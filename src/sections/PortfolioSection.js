@@ -21,6 +21,9 @@ import GradientButton from "../components/buttons/GradientButton";
 import EducationCard from "../components/EducationCard";
 import AboutMe from "../components/AboutMe";
 import HeroSection from "../components/HeroSection";
+import ProfessionalSummary from "../components/ProfessionalSummary";
+import CategorizedSkills from "../components/CategorizedSkills";
+import CurrentRole from "../components/CurrentRole";
 
 // Skeleton for loading state
 const Skeleton = ({ className = "" }) => (
@@ -95,9 +98,9 @@ const PortfolioSection = () => {
         <div className="absolute bottom-0 left-1/4 h-64 w-64 rounded-full bg-rose-400/30 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-0 md:px-8 lg:px-10 py-12 md:py-16 lg:py-20 space-y-16">
+      <div className="mx-auto max-w-7xl px-0 md:px-8 lg:px-10 py-12 md:py-16 lg:py-20 space-y-24 md:space-y-32">
         {/* HERO */}
-        <div>
+        <div id="home">
           <HeroSection/>
         </div>
 
@@ -117,14 +120,30 @@ const PortfolioSection = () => {
         )}
 
         {/* ABOUT */}
-        <div className="order-2 md:order-1">
+        <div id="about" className="order-2 md:order-1">
           <AboutMe />
+        </div>
+
+        {/* PROFESSIONAL SUMMARY */}
+        <div id="summary">
+          <ProfessionalSummary />
+        </div>
+
+        {/* CATEGORIZED SKILLS */}
+        <div id="skills">
+          <CategorizedSkills />
+        </div>
+
+        {/* CURRENT ROLE */}
+        <div id="experience">
+          <CurrentRole />
         </div>
 
        
 
         {/* SKILLS */}
         <motion.section
+        //   id="skills-cloud" // Optional, if needed separately
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -209,6 +228,7 @@ const PortfolioSection = () => {
 
         {/* CONTACT */}
         <motion.section
+          id="contact"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
