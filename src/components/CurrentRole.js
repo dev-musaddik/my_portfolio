@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Building2, MapPin, Calendar, CheckCircle, ArrowRight } from 'lucide-react';
+import { Building2, MapPin, CheckCircle, ArrowRight } from 'lucide-react';
 
 const CurrentRole = () => {
   const responsibilities = [

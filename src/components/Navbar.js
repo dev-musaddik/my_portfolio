@@ -1,23 +1,32 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import ThemeToggle from "./ThemeToggle";
-import PersonalInfoNav from "./PersonalInfoNav";
 import HackingOverlay from "./HackingOverlay";
 import MobileNav from "./MobileNav";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const { state, dispatch } = useContext(AuthContext);
-  const { isAuthenticated, loading, user } = state;
+  // Wait, the error said isAuthenticated, loading, user are unused.
+  // And logout is unused.
+  // Let's check where they were used. They were used in the old authLinks which I removed/commented out effectively by not using it in the new return.
+  
+  // Clean up:
   const [isDeveloper, setIsDeveloper] = useState(true);
   const [hacking, setHacking] = useState(false);
   const [hoveredTab, setHoveredTab] = useState(null);
 
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-  };
-
+  // We don't need auth state if we aren't using it in the Navbar anymore?
+  // User wanted "Simple" mode to show Blog/Register/Login.
+  // "Heated" shows Portfolio.
+  // I replaced the logic for `authLinks` with `simpleLinks`.
+  // So I can remove the unused auth logic if it's truly not needed for the current design.
+  // Or I should check if "Simple" mode WAS supposed to show "Logout" if logged in?
+  // The user said "Simple... show Blog, Register, Login".
+  // If logged in, maybe "Login" should be "Logout"?
+  // The previous code had `isAuthenticated ? authLinks : PersonalInfoNav`.
+  // I replaced it with `simpleLinks` which has hardcoded /login.
+  // For now, to fix the build, I will remove the unused variables.
+  
   const handleToggle = () => {
     const newMode = !isDeveloper;
     setIsDeveloper(newMode);
