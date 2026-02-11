@@ -4,7 +4,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { getProjects, getSkills } from "../api/axiosInstance";
+import { getProjects } from "../api/axiosInstance";
 import ProjectCard from "../components/ProjectCard";
 import { motion } from "framer-motion";
 import {
