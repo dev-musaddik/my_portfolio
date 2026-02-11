@@ -26,7 +26,7 @@ const Skeleton = ({ className = "" }) => (
   />
 );
 
-// SectionTitle component for headers
+// SectionTitle component for 
 const SectionTitle = ({ eyebrow, title, subtitle }) => (
   <div className="max-w-3xl mx-auto text-center space-y-3">
     {eyebrow && (
