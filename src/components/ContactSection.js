@@ -177,10 +177,11 @@ const ContactSection = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"
-                        className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg shadow-lg hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2"
+                        disabled={loading}
+                        className={`w-full py-4 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg shadow-lg hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                     >
-                        Send Message 
-                        <Send className="w-5 h-5" />
+                        {loading ? 'Sending...' : 'Send Message'}
+                        {!loading && <Send className="w-5 h-5" />}
                     </motion.button>
                 </form>
             </motion.div>

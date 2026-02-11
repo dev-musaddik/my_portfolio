@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getPlans, createPlan, deletePlan } from '../api/axiosInstance';
-import { Trash2, Calendar, CheckCircle, Plus } from 'lucide-react';
+import { Trash2, Calendar, Plus } from 'lucide-react';
 
 const AdminPlans = () => {
     const [plans, setPlans] = useState([]);
