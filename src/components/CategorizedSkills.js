@@ -6,22 +6,22 @@ const CategorizedSkills = () => {
   const skillCategories = [
     {
       icon: Code2,
-      category: "Languages",
-      skills: ["C", "C++", "Python", "Java", "JavaScript"],
+      category: "Languages & Core",
+      skills: ["C", "C++", "JavaScript", "Python", "Java", "IoT (Basic)"],
       color: "from-pink-500 to-rose-500",
       delay: 0
     },
     {
       icon: Globe,
       category: "MERN Stack",
-      skills: ["MongoDB", "Express.js", "React", "Node.js"],
+      skills: ["MongoDB", "Express.js", "React", "Node.js", "Rest API"],
       color: "from-blue-500 to-indigo-500",
       delay: 0.1
     },
     {
       icon: ShoppingCart,
-      category: "CMS & E-Com",
-      skills: ["WordPress", "Shopify Development", "Liquid"],
+      category: "Tools & Platforms",
+      skills: ["Git", "GitHub", "VS Code", "Firebase", "Postman", "Linux"],
       color: "from-green-500 to-emerald-500",
       delay: 0.2
     },

@@ -1,114 +1,155 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { AuthContext } from '../context/AuthContext';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
-// Mobile NavItem Component (helper for MobileNav)
-const MobileNavItem = ({ label, to, onClick, activeSection, section, setActiveSection, setIsOpen }) => {
-  const commonClasses = `block w-full text-left px-4 py-3 text-lg font-semibold transition-all duration-300 ease-in-out`;
-  const activeClasses = `bg-white text-black shadow-md`;
-  const inactiveClasses = `text-white hover:bg-gray-800`;
-
-  if (to) { // If 'to' prop is provided, it's a Link
-    return (
-      <Link
-        to={to}
-        onClick={() => setIsOpen(false)} // Close menu after selection
-        className={`${commonClasses} ${window.location.pathname === to ? activeClasses : inactiveClasses}`}
-      >
-        {label}
-      </Link>
-    );
-  } else if (onClick) { // If 'onClick' prop is provided, it's a button (e.g., Logout)
-    return (
-      <button
-        onClick={() => {
-          onClick();
-          setIsOpen(false); // Close menu after selection
-        }}
-        className={`${commonClasses} ${inactiveClasses}`} // Logout is never "active" in terms of route
-      >
-        {label}
-      </button>
-    );
-  } else { // Original section navigation
-    return (
-      <button
-        onClick={() => {
-          setActiveSection(section);
-          setIsOpen(false); // Close menu after selection
-        }}
-        className={`${commonClasses} ${activeSection === section ? activeClasses : inactiveClasses}`}
-      >
-        {label}
-      </button>
-    );
-  }
-};
-
-const MobileNav = ({ activeSection, setActiveSection }) => {
+const MobileNav = ({ isDeveloper, setIsDeveloper, navLinks, simpleLinks }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { state, dispatch } = useContext(AuthContext); // Use AuthContext
-  const { isAuthenticated, loading, user } = state;
+  const { dispatch } = useContext(AuthContext);
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
+    setIsOpen(false);
   };
 
+  const menuVars = {
+    initial: {
+      scaleY: 0,
+    },
+    animate: {
+      scaleY: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.12, 0, 0.39, 0],
+      },
+    },
+    exit: {
+      scaleY: 0,
+      transition: {
+        delay: 0.5,
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const containerVars = {
+    initial: {
+      transition: {
+        staggerChildren: 0.09,
+        staggerDirection: -1,
+      },
+    },
+    open: {
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.09,
+        staggerDirection: 1,
+      },
+    },
+  };
+
+  const mobileLinkVars = {
+    initial: {
+      y: "30vh",
+      transition: {
+        duration: 0.5,
+        ease: [0.37, 0, 0.63, 1],
+      },
+    },
+    open: {
+      y: 0,
+      transition: {
+        ease: [0, 0.55, 0.45, 1],
+        duration: 0.7,
+      },
+    },
+  };
+
+  const activeLinks = isDeveloper ? navLinks : simpleLinks;
+
   return (
-    <div className="relative">
+    <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75 rounded-md p-2 transition-all duration-300 hover:scale-110"
+        className="relative z-50 p-2 text-gray-800 dark:text-white hover:bg-white/10 rounded-full transition-colors"
       >
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-          ></path>
-        </svg>
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
-      {isOpen && !loading && ( // Only render menu if not loading
-        <div className="absolute right-0 mt-2 w-48 bg-black rounded-2xl shadow-xl py-2 z-10 border border-gray-700">
-          {isAuthenticated ? (
-            <>
-              <MobileNavItem label="Blog" to="/blogs" setIsOpen={setIsOpen} /> {/* Added Blog link */}
-              <MobileNavItem label="Dashboard" to="/dashboard" setIsOpen={setIsOpen} />
-              {user && user.role === 'admin' && (
-                <MobileNavItem label="Admin" to="/admin" setIsOpen={setIsOpen} />
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            variants={menuVars}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="fixed left-0 top-0 w-full h-screen bg-white/95 dark:bg-black/95 backdrop-blur-3xl origin-top z-40 flex flex-col justify-center items-center overflow-hidden"
+          >
+            <div className="absolute top-6 left-6">
+                 {/* Mobile Toggle */}
+                 <button
+                    onClick={() => {
+                        setIsDeveloper(!isDeveloper);
+                        // Optional: close menu or keep open? Keep open to explore.
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/10 rounded-full text-sm font-medium"
+                >
+                    <div className={`w-3 h-3 rounded-full ${isDeveloper ? 'bg-cyan-500' : 'bg-purple-500'}`} />
+                    {isDeveloper ? 'Developer Mode' : 'Personal Mode'}
+                </button>
+            </div>
+
+            <motion.div
+              variants={containerVars}
+              initial="initial"
+              animate="open"
+              exit="initial"
+              className="flex flex-col gap-6 items-center justify-center text-center"
+            >
+              {activeLinks.map((link) => (
+                <div key={link.id} className="overflow-hidden">
+                    <motion.div variants={mobileLinkVars}>
+                        {link.to ? (
+                            <Link
+                                to={link.to}
+                                onClick={() => setIsOpen(false)}
+                                className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white hover:text-cyan-500 dark:hover:text-purple-400 transition-colors"
+                            >
+                                {link.label}
+                            </Link>
+                        ) : (
+                            <a
+                                href={link.id === 'experience' ? '#experience' : `#${link.id}`}
+                                onClick={() => setIsOpen(false)}
+                                className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white hover:text-cyan-500 dark:hover:text-purple-400 transition-colors"
+                            >
+                                {link.label === 'Go Pro' ? 'Experience' : link.label}
+                            </a>
+                        )}
+                    </motion.div>
+                </div>
+              ))}
+              
+              {!isDeveloper && (
+                  <div className="overflow-hidden mt-8">
+                       <motion.div variants={mobileLinkVars}>
+                            <button
+                                onClick={logout}
+                                className="text-xl font-medium text-red-500 hover:text-red-400 transition-colors"
+                            >
+                                Logout
+                            </button>
+                       </motion.div>
+                  </div>
               )}
-              <MobileNavItem label="Logout" onClick={logout} setIsOpen={setIsOpen} />
-            </>
-          ) : (
-            <>
-              <MobileNavItem label="Blog" to="/blogs" setIsOpen={setIsOpen} /> {/* Added Blog link */}
-              <MobileNavItem label="Register" to="/register" setIsOpen={setIsOpen} />
-              <MobileNavItem label="Login" to="/login" setIsOpen={setIsOpen} />
-            </>
-          )}
-          {/* Updated Portfolio Section Navigation */}
-          <div className="border-t border-gray-700 my-2 pt-2">
-            {[ 'Home', 'About', 'Skills', 'Experience', 'Projects', 'Education', 'Contact'].map((item) => (
-               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-left px-4 py-3 text-lg font-semibold text-white hover:bg-gray-800 transition-all duration-300 ease-in-out"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

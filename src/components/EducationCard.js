@@ -90,10 +90,11 @@ const EducationCard = ({ item }) => {
 const FRONTEND_EDUCATION_DATA = [
   {
     _id: 'edu1',
-    date: '2022 – 2027 (Expected July)',
+    date: 'Jan 2022 – Expected Jan 2027',
     title: 'Diploma in Computer Technology',
     institution: 'Faridpur Polytechnic Institute, Faridpur, Bangladesh',
-    description: `Currently studying in the 6th semester of the Diploma in Computer Technology program. Focused on software development, database management, and networking. Demonstrated consistent academic growth and technical skill development through each semester.`,
+    description: `Aspiring Full Stack Web Developer with a solid background in both front-end and back-end technologies. Currently studying for a Diploma in Computer Science. 
+    Skilled in C, HTML, CSS, JavaScript, and React. Experienced with MongoDB and building servers/APIs.`,
     semesters: [
       { title: '1st Semester (Published: 19 Oct 2023)', gpa: 3.73 },
       { title: '2nd Semester (Published: 03 Mar 2024)', gpa: 2.62 },
@@ -101,14 +102,23 @@ const FRONTEND_EDUCATION_DATA = [
       { title: '4th Semester (Published: 11 Mar 2025)', gpa: 3.65 },
       { title: '5th Semester (Published: 26 Oct 2025)', gpa: 3.51 },
     ],
-    note: 'The 2nd semester GPA was affected by my transfer from Jhenaidah Polytechnic Institute to Faridpur Polytechnic Institute. After the transition, my performance improved significantly in subsequent semesters.',
+    note: 'The 2nd semester GPA was affected by my transfer from Jhenaidah Polytechnic Institute to Faridpur Polytechnic Institute. After the transition, my performance improved significantly.',
+  },
+  {
+    _id: 'amb1',
+    date: 'Dec 2021 – Current',
+    title: 'Certified Ambassador',
+    institution: 'ICT Olympiad Bangladesh',
+    description: `• Facilitated communication between participants and organizers to enhance event experience.
+    • Coordinated logistics and resources for successful execution of ICT Olympiad events.
+    • Mentored junior ambassadors, promoting knowledge sharing and skill development.`,
   },
   {
     _id: 'edu2',
-    date: '2021 – 2022',
+    date: 'Jan 2022',
     title: 'Secondary School Certificate (SSC)',
-    institution: 'Yasin High School, Rajbari, Bangladesh',
-    description: `Completed SSC in the Science group, developing a strong foundation in mathematics, physics, and logical problem-solving which continue to support my technical education.`,
+    institution: 'Yasin High School, Rajbari Sodor, Bangladesh',
+    description: `Completed SSC in the Science group, developing a strong foundation in mathematics, physics, and logical problem-solving.`,
   },
 ];
 

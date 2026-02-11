@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowDownToLine, Sparkles, Briefcase } from "lucide-react";
+import { ArrowDownToLine, Sparkles, Briefcase, Flame } from "lucide-react";
 
 const AboutSection = () => {
   const SectionTitle = ({ eyebrow, title, subtitle }) => (
@@ -45,7 +45,7 @@ const AboutSection = () => {
           <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-indigo-500/10 via-orange-500/10 to-rose-500/10 rounded-xl border border-white/10 shadow-md">
             <Briefcase className="text-orange-500 w-6 h-6" />
             <p className="text-sm md:text-base font-medium">
-              Currently working as a <span className="font-semibold text-orange-500">Project Manager</span> at {""}
+              Currently driving success as a <span className="font-semibold text-orange-500">Project Manager</span> at {""}
               <a
                 href="https://axelmandigital.co.uk/"
                 target="_blank"
@@ -53,33 +53,34 @@ const AboutSection = () => {
                 className="text-indigo-500 hover:underline font-semibold"
               >
                 Axelman Digital
-              </a>{" "}
-              {/* (Remote, BD Time: 3 PM – 12 AM) */}
+              </a>
+              <span className="inline-flex items-center gap-1 ml-2 bg-gradient-to-r from-orange-500/10 to-red-500/10 px-2 py-0.5 rounded-full border border-orange-200 dark:border-orange-800 animate-pulse">
+                <Flame className="w-4 h-4 text-orange-600 dark:text-orange-400" fill="currentColor" />
+                <span className="text-sm font-bold bg-gradient-to-b from-yellow-500 via-orange-500 to-red-600 bg-clip-text text-transparent drop-shadow-sm">
+                  UK
+                </span>
+              </span>
             </p>
           </div>
 
           <p className="text-lg font-medium">
-            I'm <span className="text-orange-500 font-semibold">Musaddik Hossain</span>, a passionate Full-Stack Developer who thrives on
-            building fast, modern, and user-focused web applications that leave
-            a lasting impression.
+            I'm <span className="text-orange-500 font-semibold">Musaddik Hossain</span>. I bridge the gap between complex engineering and strategic business goals. 
+            More than just managing timelines, I bring deep technical expertise to leadership.
           </p>
 
           <p>
-            I specialize in crafting scalable solutions using technologies like
-            <span className="text-indigo-500 font-medium"> React, Node.js, Express, Tailwind CSS</span>, and
-            <span className="text-rose-500 font-medium"> TypeScript</span>. My focus is to merge creativity with performance,
-            ensuring each project is beautiful and functional.
+            With a strong background in <span className="text-indigo-500 font-medium">Full-Stack Development (MERN, TypeScript)</span>, 
+            I understand the code behind the product. This empowers me to lead development teams effectively, make informed architectural decisions, 
+            and ensure that quality is built into every step of the process.
           </p>
 
           <p>
-            At Axelman Digital, I collaborate with talented teams to design and
-            optimize Shopify stores, ensuring top-notch SEO performance and smooth
-            user experiences across platforms.
+            At <span className="font-semibold">Axelman Digital</span>, I advocate for both the user and the developer, optimizing workflows 
+            to deliver high-performance digital solutions that drive real business growth.
           </p>
 
           <p>
-            Beyond work, I continuously explore new tools, frameworks, and design
-            systems to stay at the cutting edge of frontend and backend development.
+            I am passionate about building systems that scale and teams that thrive.
           </p>
 
           {/* Resume Button */}
@@ -94,7 +95,7 @@ const AboutSection = () => {
         </div>
 
         {/* Right Side — Profile Image */}
-        <div className="flex justify-center order-1 lg:order-1">
+        <div className="flex justify-center order-1 lg:order-2">
           <div className="relative group">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 via-orange-500 to-rose-500 blur opacity-40 group-hover:opacity-70 transition duration-500" />
             <img

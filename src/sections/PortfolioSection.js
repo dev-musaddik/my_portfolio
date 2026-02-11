@@ -24,6 +24,7 @@ import HeroSection from "../components/HeroSection";
 import ProfessionalSummary from "../components/ProfessionalSummary";
 import CategorizedSkills from "../components/CategorizedSkills";
 import CurrentRole from "../components/CurrentRole";
+import ContactSection from "../components/ContactSection";
 
 // Skeleton for loading state
 const Skeleton = ({ className = "" }) => (
@@ -90,7 +91,7 @@ const PortfolioSection = () => {
   const projectsList = useMemo(() => projects, [projects]);
 
   return (
-    <div className="relative scroll-smooth">
+    <div className="relative scroll-smooth overflow-x-clip">
       {/* Ambient gradient blobs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-fuchsia-400/40 blur-3xl" />
@@ -227,37 +228,9 @@ const PortfolioSection = () => {
         </motion.section>
 
         {/* CONTACT */}
-        <motion.section
-          id="contact"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="rounded-3xl border border-white/20 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl p-8 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)] text-center"
-        >
-          <SectionTitle
-            eyebrow="Contact"
-            title="Get in Touch"
-            subtitle="Let's collaborate on something exceptional"
-          />
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <GradientButton href="mailto:musaddikh13@gmai.com" Icon={Mail}>
-              Email Me
-            </GradientButton>
-            <GradientButton
-              href="https://www.linkedin.com/in/musaddikh13/"
-              Icon={Linkedin}
-            >
-              LinkedIn
-            </GradientButton>
-            <GradientButton
-              href="https://github.com/dev-musaddik"
-              Icon={Github}
-            >
-              GitHub
-            </GradientButton>
-          </div>
-        </motion.section>
+        <div id="contact">
+          <ContactSection />
+        </div>
       </div>
     </div>
   );

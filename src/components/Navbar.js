@@ -87,9 +87,9 @@ const Navbar = () => {
             opacity: isVisible ? 1 : 0
         }}
         transition={{ duration: 0.3 }}
-        className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
+        className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="flex items-center gap-4 bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-full shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] px-6 py-3 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.5)]">
+        <div className="flex items-center justify-between md:justify-center gap-4 bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-full shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] px-4 py-3 md:px-6 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.5)] w-full max-w-[95%] md:max-w-fit pointer-events-auto">
             
             {/* Logo Area */}
             <Link
@@ -100,7 +100,7 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Links */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1">
             {(isDeveloper ? navLinks : simpleLinks).map((link) => (
                 link.to ? (
                     <Link
@@ -141,14 +141,14 @@ const Navbar = () => {
             </div>
 
             {/* Separator */}
-            <div className="h-6 w-px bg-gray-300 dark:bg-gray-700 mx-2 hidden md:block" />
+            <div className="h-6 w-px bg-gray-300 dark:bg-gray-700 mx-2 hidden lg:block" />
 
             {/* Actions Area */}
             <div className="flex items-center gap-3">
                 {/* Mode Toggle */}
                 <button
                     onClick={handleToggle}
-                    className="relative group p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+                    className="hidden lg:block relative group p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
                     title={isDeveloper ? "Switch to Personal" : "Switch to Developer"}
                 >
                     <div className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${isDeveloper ? 'border-cyan-500 bg-cyan-500/20' : 'border-purple-500 bg-purple-500/20'}`} />
@@ -157,8 +157,13 @@ const Navbar = () => {
                 <ThemeToggle />
 
                 {/* Mobile Menu Trigger */}
-                <div className="md:hidden">
-                    <MobileNav />
+                <div className="lg:hidden">
+                    <MobileNav 
+                        isDeveloper={isDeveloper} 
+                        setIsDeveloper={setIsDeveloper}
+                        navLinks={navLinks}
+                        simpleLinks={simpleLinks}
+                    />
                 </div>
             </div>
 
