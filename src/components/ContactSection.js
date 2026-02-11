@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { submitContactMessage } from '../api/axiosInstance';
 
 const ContactSection = () => {
   const [formState, setFormState] = useState({
@@ -8,6 +9,7 @@ const ContactSection = () => {
     email: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormState({
@@ -16,12 +18,19 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, send data to backend here.
-    console.log("Form Submitted:", formState);
-    alert("Thanks for reaching out! I'll get back to you soon.");
-    setFormState({ name: '', email: '', message: '' });
+    setLoading(true);
+    try {
+      await submitContactMessage(formState);
+      alert("Thanks for reaching out! I'll get back to you soon.");
+      setFormState({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactDetails = [

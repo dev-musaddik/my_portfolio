@@ -34,8 +34,8 @@ const AboutSection = () => {
       className="rounded-3xl border border-white/20 bg-gradient-to-br from-white/90 via-indigo-50/70 to-fuchsia-50/60 dark:from-gray-900/80 dark:via-gray-800/70 dark:to-gray-900/60 backdrop-blur-xl p-4 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
     >
       <SectionTitle
-        eyebrow="About"
-        title="About Me"
+        eyebrow="My Story"
+        title="Who I Am"
         subtitle="Turning creativity and logic into powerful web experiences."
       />
 
@@ -78,6 +78,12 @@ const AboutSection = () => {
             At <span className="font-semibold">Axelman Digital</span>, I advocate for both the user and the developer, optimizing workflows 
             to deliver high-performance digital solutions that drive real business growth.
           </p>
+
+          <div className="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/10 border border-orange-100 dark:border-orange-800/30 text-sm md:text-base italic text-gray-600 dark:text-gray-400">
+            <span className="font-semibold text-orange-600 dark:text-orange-400 not-italic">Fun Fact:</span> {" "}
+            When I joined the team, my name evolved from Musaddik to simply <span className="font-bold text-gray-900 dark:text-white">"Musa"</span>. 
+            It represents more than just a nickname—it's a symbol of the agility and direct communication I bring to every project.
+          </div>
 
           <p>
             I am passionate about building systems that scale and teams that thrive.

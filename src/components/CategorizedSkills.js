@@ -47,7 +47,7 @@ const CategorizedSkills = () => {
       
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 dark:from-white dark:via-gray-200 dark:to-gray-400">
-          Technical Arsenal
+          My Technical Arsenal
         </h2>
         <p className="mt-4 text-gray-600 dark:text-gray-400">
             A comprehensive toolkit for building and scaling digital products

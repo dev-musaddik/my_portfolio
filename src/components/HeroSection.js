@@ -55,9 +55,9 @@ const HeroSection = () => {
           {/* Headlines */}
           <div className="space-y-4">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-[1.1]">
-              Building <br />
+              Hi, I'm <br />
               <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
-                Digital Reality
+                Musaddik Hossain
               </span>
             </h1>
             <div className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-medium h-8">
@@ -77,8 +77,7 @@ const HeroSection = () => {
               />
             </div>
             <p className="max-w-xl mx-auto lg:mx-0 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
-              I transform complex ideas into robust, scalable, and beautiful web applications. 
-              Bridging the gap between technical excellence and strategic business growth.
+              I do more than just code. I am a Project Manager and Developer who bridges the gap between technical excellence and strategic business growth.
             </p>
           </div>
 
@@ -147,7 +146,7 @@ const HeroSection = () => {
             <div className="font-mono text-sm space-y-4 text-gray-300 relative z-10">
                 <div className="flex">
                     <span className="text-pink-500 mr-2">const</span>
-                    <span className="text-blue-400">developer</span>
+                    <span className="text-blue-400">profile</span>
                     <span className="text-white mx-2">=</span>
                     <span className="text-yellow-300">{`{`}</span>
                 </div>
@@ -156,16 +155,16 @@ const HeroSection = () => {
                     <span className="text-green-400 ml-2">'Musaddik Hossain',</span>
                 </div>
                 <div className="pl-6 code-line">
-                    <span className="text-purple-400">skills:</span>
-                    <span className="text-yellow-300 ml-2">['React', 'Node', 'MERN'],</span>
+                    <span className="text-purple-400">roles:</span>
+                    <span className="text-yellow-300 ml-2">['Project Manager', 'Developer', 'Ambassador'],</span>
                 </div>
                 <div className="pl-6">
-                    <span className="text-purple-400">passion:</span>
-                    <span className="text-green-400 ml-2">'Building Scalable Systems',</span>
+                    <span className="text-purple-400">focus:</span>
+                    <span className="text-green-400 ml-2">'Bridging Tech & Business',</span>
                 </div>
                 <div className="pl-6">
                     <span className="text-purple-400">status:</span>
-                    <span className="text-green-400 ml-2">'Ready to Collaborate',</span>
+                    <span className="text-green-400 ml-2">'Ready to Innovate',</span>
                 </div>
                 <div>
                      <span className="text-yellow-300">{`}`}</span>

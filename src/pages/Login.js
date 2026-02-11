@@ -19,19 +19,20 @@ const Login = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            };
-            const body = JSON.stringify({ email, password });
-            const res = await axiosInstance.post('/auth/login', body, config);
+            // Updated to pass object directly, axios handles JSON stringify
+            const body = { email, password };
+            const res = await axiosInstance.post('/auth/login', body);
+            
             localStorage.setItem('token', res.data.token);
             await loadUser();
             navigate('/dashboard');
         } catch (err) {
-            console.error(err.response.data);
-            setError(err.response.data.msg || err.response.data.errors[0].msg);
+            console.error("Login Error:", err);
+            setError(
+                err.response?.data?.msg || 
+                err.response?.data?.errors?.[0]?.msg || 
+                "Login failed. Please try again."
+            );
         }
     };
 
@@ -40,7 +41,7 @@ const Login = () => {
             <div className="p-8 rounded-lg shadow-lg w-full max-w-md bg-background dark:bg-background-dark">
                 <h1 className="text-3xl font-bold text-center mb-6 text-text-primary dark:text-text-primary-dark">Sign In</h1>
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-                <form onSubmit={e => onSubmit(e)} className="space-y-4">
+                <form onSubmit={onSubmit} className="space-y-4">
                     <div>
                         <input
                             type="email"

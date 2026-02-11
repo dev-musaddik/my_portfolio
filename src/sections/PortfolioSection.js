@@ -139,7 +139,7 @@ const PortfolioSection = () => {
        
 
         {/* SKILLS */}
-        <motion.section
+        {/* <motion.section
         //   id="skills-cloud" // Optional, if needed separately
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,9 +148,9 @@ const PortfolioSection = () => {
           className="rounded-3xl border border-white/20 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl p-8 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
         >
           <SectionTitle
-            eyebrow="Skills"
-            title="Skills & Technologies"
-            subtitle="A snapshot of my current toolkit"
+            eyebrow="My Skills"
+            title="My Tech Stack"
+            subtitle="The tools I use to bring ideas to life"
           />
           {loading ? (
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -166,7 +166,7 @@ const PortfolioSection = () => {
             </div>
           )}
           <Tooltip id="skill-tooltip" />
-        </motion.section>
+        </motion.section> */}
 
         {/* PROJECTS */}
         <motion.section
@@ -178,9 +178,9 @@ const PortfolioSection = () => {
           className="rounded-3xl border border-white/20 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl p-8 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
         >
           <SectionTitle
-            eyebrow="Work"
-            title="Featured Projects"
-            subtitle="A selection of shipped, real‑world builds"
+            eyebrow="My Work"
+            title="What I've Built"
+            subtitle="Projects I am proud to showcase"
           />
           {loading ? (
             <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -217,7 +217,7 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
           className="rounded-3xl border border-white/20 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl p-8 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
         >
-          <SectionTitle eyebrow="Education" title="Education" subtitle="" />
+          <SectionTitle eyebrow="Background" title="My Academic Journey" subtitle="" />
           <div className="mt-10 grid grid-cols-1 md:grid-cols-1 gap-10 items-center">
             <EducationCard />
           </div>

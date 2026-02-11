@@ -179,7 +179,7 @@ const EducationList = () => {
             <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
             <path d="M6 12v5c0 1.7.7 3.2 1.9 4.2C8.7 22 10.3 22.5 12 22.5s3.3-.5 4.1-1.3c1.2-1 1.9-2.5 1.9-4.2v-5" />
           </svg>
-          Education
+          My Academic Path
         </span>
       </div>
 

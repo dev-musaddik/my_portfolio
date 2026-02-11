@@ -16,6 +16,9 @@ import SkillForm from "../components/SkillForm";
 import ProfileImageForm from "../components/ProfileImageForm";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import AdminContacts from "./AdminContacts";
+import AdminEvents from "./AdminEvents";
+import AdminPlans from "./AdminPlans";
 
 const AdminDashboard = () => {
   const [blogs, setBlogs] = useState([]);
@@ -200,6 +203,9 @@ const AdminDashboard = () => {
           Admin Dashboard
         </h2>
         <nav className="space-y-4">
+          <a href="#messages" className="block p-3 rounded-md hover:bg-indigo-600 transition">Messages</a>
+          <a href="#events" className="block p-3 rounded-md hover:bg-indigo-600 transition">Events</a>
+          <a href="#plans" className="block p-3 rounded-md hover:bg-indigo-600 transition">Plans</a>
           <a href="#blogs" className="block p-3 rounded-md hover:bg-indigo-600 transition">Blogs</a>
           <a href="#projects" className="block p-3 rounded-md hover:bg-indigo-600 transition">Projects</a>
           <a href="#skills" className="block p-3 rounded-md hover:bg-indigo-600 transition">Skills</a>
@@ -209,6 +215,24 @@ const AdminDashboard = () => {
 
       {/* Content */}
       <div className="w-3/4 p-8 space-y-10">
+        
+        {/* Messages Section - NEW */}
+        <section id="messages">
+          <div className="bg-white shadow-md rounded-lg overflow-hidden">
+             <AdminContacts />
+          </div>
+        </section>
+
+        {/* Events Section */}
+        <section id="events">
+             <AdminEvents />
+        </section>
+
+        {/* Plans Section */}
+        <section id="plans">
+             <AdminPlans />
+        </section>
+
         {/* Profile Image Section */}
         <section id="profile-image">
           <h2 className="text-3xl font-semibold text-gray-800 mb-4">

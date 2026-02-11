@@ -24,19 +24,20 @@ const Register = () => {
             setError('Passwords do not match');
         } else {
             try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                };
-                const body = JSON.stringify({ name, email, password });
-                const res = await axiosInstance.post('/auth/register', body, config);
+                // Updated to pass object directly, axios handles JSON stringify
+                const body = { name, email, password };
+                const res = await axiosInstance.post('/auth/register', body);
+                
                 localStorage.setItem('token', res.data.token);
                 await loadUser();
                 navigate('/dashboard');
             } catch (err) {
-                console.error(err.response.data);
-                setError(err.response.data.msg || err.response.data.errors[0].msg);
+                console.error("Register Error:", err);
+                setError(
+                    err.response?.data?.msg || 
+                    err.response?.data?.errors?.[0]?.msg || 
+                    "Registration failed. Please try again."
+                );
             }
         }
     };
@@ -46,7 +47,7 @@ const Register = () => {
             <div className="p-8 rounded-lg shadow-lg w-full max-w-md bg-background dark:bg-background-dark">
                 <h1 className="text-3xl font-bold text-center mb-6 text-text-primary dark:text-text-primary-dark">Sign Up</h1>
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-                <form onSubmit={e => onSubmit(e)} className="space-y-4">
+                <form onSubmit={onSubmit} className="space-y-4">
                     <div>
                         <input
                             type="text"
