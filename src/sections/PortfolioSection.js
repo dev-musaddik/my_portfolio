@@ -5,9 +5,6 @@ import React, {
   useCallback,
 } from "react";
 import { getProjects, getSkills } from "../api/axiosInstance";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
-import SkillCard from "../components/SkillCard";
 import ProjectCard from "../components/ProjectCard";
 import { motion } from "framer-motion";
 import {
@@ -83,7 +80,7 @@ const PortfolioSection = () => {
     fetchData();
   }, [fetchData]);
 
-  const skillsList = useMemo(() => skills, [skills]);
+  // const skillsList = useMemo(() => skills, [skills]);
   const projectsList = useMemo(() => projects, [projects]);
 
   return (
