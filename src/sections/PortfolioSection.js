@@ -53,7 +53,7 @@ const SectionTitle = ({ eyebrow, title, subtitle }) => (
 const PortfolioSection = () => {
 
   const [projects, setProjects] = useState([]);
-  const [skills, setSkills] = useState([]);
+  // const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   // const [typingDone, setTypingDone] = useState(false);
@@ -62,12 +62,12 @@ const PortfolioSection = () => {
     try {
       setLoading(true);
       setError(null);
-      const [projectsData, skillsData] = await Promise.all([
+      const [projectsData] = await Promise.all([
         getProjects(),
-        getSkills(),
+        // getSkills(),
       ]);
       setProjects(projectsData || []);
-      setSkills(skillsData || []);
+      // setSkills(skillsData || []);
     } catch (err) {
       console.error("Error fetching projects and skills:", err);
       setError("Failed to load content. Please try again.");
