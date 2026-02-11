@@ -169,6 +169,7 @@ const PortfolioSection = () => {
         </motion.section> */}
 
         {/* PROJECTS */}
+        {/* PROJECTS */}
         <motion.section
           id="projects"
           initial={{ opacity: 0, y: 20 }}
