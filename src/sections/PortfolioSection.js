@@ -11,13 +11,9 @@ import SkillCard from "../components/SkillCard";
 import ProjectCard from "../components/ProjectCard";
 import { motion } from "framer-motion";
 import {
-  Mail,
-  Github,
-  Linkedin,
   RefreshCcw,
   Sparkles,
 } from "lucide-react";
-import GradientButton from "../components/buttons/GradientButton";
 import EducationCard from "../components/EducationCard";
 import AboutMe from "../components/AboutMe";
 import HeroSection from "../components/HeroSection";
