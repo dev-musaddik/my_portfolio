@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 const HeroSection = () => {
   // Mouse tilt effect for the hero card
