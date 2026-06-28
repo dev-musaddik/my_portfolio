@@ -77,7 +77,7 @@ const AboutSection = () => {
           </div>
 
           <a
-            href="/Musaddik_Hossain_CV.pdf"
+            href="/Resume_Musaddik_2026.pdf"
             download
             className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gray-100 hover:bg-blue-600 dark:bg-gray-900 dark:hover:bg-blue-500 text-gray-900 hover:text-white dark:text-gray-100 dark:hover:text-white font-semibold rounded-xl transition-all duration-200 shadow-sm"
           >
