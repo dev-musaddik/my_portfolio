@@ -1,114 +1,145 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { ArrowDownToLine, Sparkles, Briefcase, Flame } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download } from "lucide-react";
 
 const AboutSection = () => {
-  const SectionTitle = ({ eyebrow, title, subtitle }) => (
-    <div className="max-w-3xl mx-auto text-center space-y-3">
-      {eyebrow && (
-        <p className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-gray-600 dark:text-gray-400">
-          <Sparkles className="h-4 w-4" /> {eyebrow}
-        </p>
-      )}
-      <h1 className="text-4xl font-bold">
-  <span className="bg-gradient-to-r from-orange-500 to-blue-500 bg-clip-text text-transparent">
-    {title}
-  </span>
-</h1>
+  const [activeTab, setActiveTab] = useState("pm");
 
-      {subtitle && (
-        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400">
-          {subtitle}
-        </p>
-      )}
-    </div>
-  );
+  const disciplines = {
+    pm: {
+      title: "Project Management",
+      lead: "I act as the primary client contact — gathering requirements, managing expectations, and coordinating cross-functional teams across design, SEO, and paid ads to deliver on time.",
+      chips: [
+        "Project lifecycle management",
+        "Agile / Scrum",
+        "Stakeholder engagement",
+        "Client relationship management",
+        "Team leadership",
+        "Cross-functional coordination",
+        "Multi-project delivery"
+      ]
+    },
+    mkt: {
+      title: "Digital Marketing",
+      lead: "I plan, run, and optimise campaigns across search and social — pairing on-page and technical SEO with paid media so the spend turns into measurable growth.",
+      chips: [
+        "SEO — on-page & technical",
+        "Google Ads",
+        "Meta Ads",
+        "Campaign planning & execution",
+        "Social media strategy",
+        "Performance analysis"
+      ]
+    },
+    dev: {
+      title: "Web & CMS",
+      lead: "I build responsive, fast interfaces and manage the CMS side too — from Shopify store setup and WordPress sites to React front-ends, API integration, and performance debugging.",
+      chips: [
+        "Shopify setup & customisation",
+        "WordPress development",
+        "React",
+        "Tailwind CSS",
+        "JavaScript",
+        "API integration",
+        "Performance optimisation"
+      ]
+    }
+  };
 
   return (
     <motion.section
-      id="about"
+      id="disciplines"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6 }}
-      className="rounded-3xl border border-white/20 bg-gradient-to-br from-white/90 via-indigo-50/70 to-fuchsia-50/60 dark:from-gray-900/80 dark:via-gray-800/70 dark:to-gray-900/60 backdrop-blur-xl p-4 md:p-12 lg:p-14 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)]"
+      className="rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6 md:p-12 shadow-xl"
     >
-      <SectionTitle
-        eyebrow="My Story"
-        title="Who I Am"
-        subtitle="Turning creativity and logic into powerful web experiences."
-      />
-
-      <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        {/* Left Side — Text Section */}
-        <div className="order-2 lg:order-1 space-y-6 text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-          <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-indigo-500/10 via-orange-500/10 to-rose-500/10 rounded-xl border border-white/10 shadow-md">
-            <Briefcase className="text-orange-500 w-6 h-6" />
-            <p className="text-sm md:text-base font-medium">
-              Currently driving success as a <span className="font-semibold text-orange-500">Project Manager</span> at {""}
-              <a
-                href="https://axelmandigital.co.uk/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-indigo-500 hover:underline font-semibold"
-              >
-                Axelman Digital
-              </a>
-              <span className="inline-flex items-center gap-1 ml-2 bg-gradient-to-r from-orange-500/10 to-red-500/10 px-2 py-0.5 rounded-full border border-orange-200 dark:border-orange-800 animate-pulse">
-                <Flame className="w-4 h-4 text-orange-600 dark:text-orange-400" fill="currentColor" />
-                <span className="text-sm font-bold bg-gradient-to-b from-yellow-500 via-orange-500 to-red-600 bg-clip-text text-transparent drop-shadow-sm">
-                  UK
-                </span>
-              </span>
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Left Side: Photo & Quick Info */}
+        <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 lg:border-r lg:border-gray-200 lg:dark:border-gray-800 lg:pr-8">
+          <div className="relative group">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 blur opacity-25 group-hover:opacity-40 transition duration-500" />
+            <img
+              src="/musa.png"
+              alt="Musaddik Hossain"
+              className="relative rounded-full h-44 w-44 object-cover border-4 border-white dark:border-gray-900 shadow-lg"
+            />
+          </div>
+          
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Musaddik Hossain</h3>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mt-1">Project Manager & Developer</p>
           </div>
 
-          <p className="text-lg font-medium">
-            I'm <span className="text-orange-500 font-semibold">Musaddik Hossain</span>. I bridge the gap between complex engineering and strategic business goals. 
-            More than just managing timelines, I bring deep technical expertise to leadership.
-          </p>
-
-          <p>
-            With a strong background in <span className="text-indigo-500 font-medium">Full-Stack Development (MERN, TypeScript)</span>, 
-            I understand the code behind the product. This empowers me to lead development teams effectively, make informed architectural decisions, 
-            and ensure that quality is built into every step of the process.
-          </p>
-
-          <p>
-            At <span className="font-semibold">Axelman Digital</span>, I advocate for both the user and the developer, optimizing workflows 
-            to deliver high-performance digital solutions that drive real business growth.
-          </p>
-
-          <div className="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/10 border border-orange-100 dark:border-orange-800/30 text-sm md:text-base italic text-gray-600 dark:text-gray-400">
-            <span className="font-semibold text-orange-600 dark:text-orange-400 not-italic">Fun Fact:</span> {" "}
-            When I joined the team, my name evolved from Musaddik to simply <span className="font-bold text-gray-900 dark:text-white">"Musa"</span>. 
-            It represents more than just a nickname—it's a symbol of the agility and direct communication I bring to every project.
+          <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-150 dark:border-gray-800 text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed italic">
+            <span className="font-semibold text-blue-600 dark:text-blue-400 not-italic">Nicknamed "Musa":</span> Representing speed, direct communication, and adaptability in fast-paced projects.
           </div>
 
-          <p>
-            I am passionate about building systems that scale and teams that thrive.
-          </p>
-
-          {/* Resume Button */}
           <a
             href="/Musaddik_Hossain_CV.pdf"
             download
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 via-orange-500 to-rose-500 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gray-100 hover:bg-blue-600 dark:bg-gray-900 dark:hover:bg-blue-500 text-gray-900 hover:text-white dark:text-gray-100 dark:hover:text-white font-semibold rounded-xl transition-all duration-200 shadow-sm"
           >
-            <ArrowDownToLine className="w-5 h-5" />
+            <Download className="w-4 h-4" />
             Download Resume
           </a>
         </div>
 
-        {/* Right Side — Profile Image */}
-        <div className="flex justify-center order-1 lg:order-2">
-          <div className="relative group">
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 via-orange-500 to-rose-500 blur opacity-40 group-hover:opacity-70 transition duration-500" />
-            <img
-              src="/profile.webp"
-              alt="Musaddik Hossain Profile"
-              className="relative rounded-full h-72 w-72 md:h-96 md:w-96 object-cover border-4 border-white/20 shadow-2xl transform group-hover:scale-105 transition duration-500"
-            />
+        {/* Right Side: Tabbed Disciplines */}
+        <div className="lg:col-span-8 space-y-8">
+          <div className="space-y-3">
+            <p className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-blue-600 dark:text-blue-400 font-semibold font-mono">
+              01 · What I Do
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
+              Three sides of the same job
+            </h2>
+          </div>
+
+          {/* Tab Buttons */}
+          <div className="flex flex-wrap gap-2.5 border-b border-gray-200 dark:border-gray-800 pb-4">
+            {Object.keys(disciplines).map((key) => (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                className={`px-4 py-2 rounded-full font-mono text-xs md:text-sm transition-all border ${
+                  activeTab === key
+                    ? "bg-gray-900 border-gray-900 text-white dark:bg-white dark:border-white dark:text-gray-900 font-bold"
+                    : "bg-white border-gray-200 text-gray-500 hover:text-gray-900 dark:bg-gray-950 dark:border-gray-850 dark:text-gray-400 dark:hover:text-white"
+                }`}
+              >
+                {disciplines[key].title}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Content Panel */}
+          <div className="min-h-[160px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-6"
+              >
+                <p className="text-lg md:text-xl text-gray-800 dark:text-gray-200 leading-relaxed font-normal">
+                  {disciplines[activeTab].lead}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {disciplines[activeTab].chips.map((chip, index) => (
+                    <span
+                      key={index}
+                      className="px-3.5 py-1.5 rounded-lg border border-gray-250 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

@@ -50,13 +50,46 @@ const SectionTitle = ({ eyebrow, title, subtitle }) => (
   </div>
 );
 
+const FRONTEND_PROJECTS_DATA = [
+  {
+    _id: "proj1",
+    title: "Premium Shopify Store Build",
+    description: "Designed and developed a custom Shopify store for a UK-based e-commerce brand. Features custom liquid sections, page speed optimization, and interactive cart features.",
+    technologies: ["Shopify", "Liquid", "JavaScript", "CSS"],
+    liveUrl: "https://shopify.com",
+    githubUrl: "https://github.com"
+  },
+  {
+    _id: "proj2",
+    title: "MERN Stack Client Portal",
+    description: "A secure dashboard for client onboarding, file uploads, and real-time project management updates.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"],
+    liveUrl: "https://github.com",
+    githubUrl: "https://github.com"
+  },
+  {
+    _id: "proj3",
+    title: "Agency WordPress Site",
+    description: "Built a high-converting, responsive WordPress site for digital marketing campaigns with optimized landing pages.",
+    technologies: ["WordPress", "PHP", "JavaScript", "SEO"],
+    liveUrl: "https://wordpress.org",
+    githubUrl: ""
+  },
+  {
+    _id: "proj4",
+    title: "Ad Campaign Analytics Dashboard",
+    description: "Configured tracking, conversion APIs, and performance visualization for Google & Meta marketing campaigns.",
+    technologies: ["Google Analytics", "Google Ads", "Meta Ads", "React"],
+    liveUrl: "https://google.com",
+    githubUrl: ""
+  }
+];
+
 const PortfolioSection = () => {
 
   const [projects, setProjects] = useState([]);
-  // const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [typingDone, setTypingDone] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -64,13 +97,12 @@ const PortfolioSection = () => {
       setError(null);
       const [projectsData] = await Promise.all([
         getProjects(),
-        // getSkills(),
       ]);
-      setProjects(projectsData || []);
-      // setSkills(skillsData || []);
+      setProjects(projectsData && projectsData.length > 0 ? projectsData : FRONTEND_PROJECTS_DATA);
     } catch (err) {
-      console.error("Error fetching projects and skills:", err);
-      setError("Failed to load content. Please try again.");
+      console.error("Error fetching projects:", err);
+      // Fallback silently to local data if backend is offline
+      setProjects(FRONTEND_PROJECTS_DATA);
     } finally {
       setLoading(false);
     }
@@ -80,7 +112,6 @@ const PortfolioSection = () => {
     fetchData();
   }, [fetchData]);
 
-  // const skillsList = useMemo(() => skills, [skills]);
   const projectsList = useMemo(() => projects, [projects]);
 
   return (

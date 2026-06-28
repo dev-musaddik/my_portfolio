@@ -39,7 +39,7 @@ const AboutMeSection = () => {
       <h2 className="text-2xl font-bold mb-4">About Me</h2>
       <div className="flex items-center mb-4">
         <img
-          src={user?.profileImage || 'https://via.placeholder.com/150'}
+          src={user?.profileImage || '/musa.png'}
           alt="Profile"
           className="w-32 h-32 rounded-full mr-4"
         />
